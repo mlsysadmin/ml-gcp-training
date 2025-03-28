@@ -1,7 +1,7 @@
 steps:
   # Install dependencies
   - name: 'node:22'
-    dir: 'todo-app'
+    dir: 'final-todo-app'
     entrypoint: npm
     args: ['ci']
 
@@ -17,12 +17,12 @@ steps:
   # Deploy to App Engine
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy', '--no-promote']
-    dir: 'todo-app'
+    dir: 'final-todo-app'
 
 # Access secrets from Secret Manager
 availableSecrets:
   secretManager:
-    - versionName: projects/${PROJECT_ID}/secrets/API_KEY/versions/1
+    - versionName: projects/${PROJECT_ID}/secrets/API_KEY/versions/latest
       env: 'API_KEY'
 
 timeout: '1600s' 
